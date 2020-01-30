@@ -2,9 +2,9 @@
   "name": "docker_node_app",
   "version": "1.0.0",
   "description": "nodejs image demo",
-  "author": "your name",
+  "author": "Ofir A.",
   "license": "MIT",
-  "main": "app.js",
+  "main": "server.js",
   "keywords": [],
   "scripts": {
     "------production------": "",

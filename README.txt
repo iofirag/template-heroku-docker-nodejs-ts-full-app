@@ -1,4 +1,4 @@
-prerequest installed:
+* Prerequest installed: *
 - NodeJS
 - Npm
 - yarn
@@ -6,27 +6,43 @@ prerequest installed:
 
 ----------------------------------------------
 
+* Features: *
+docker
+  - nodemon
+      hot-reload
+  - inspector
+      breakpoint
+      breakpoint-wait
+  - ts-node
+  - develop / production environment modes
+  
+----------------------------------------------
+
+* Environment Vars: *
+  base-shared variables in:
+    - .env
+  override variables in:
+    - environment/dev.env
+    - environment/prod.env
+
+----------------------------------------------
+
 * Development / vpn *
-  change script in Dockerfile to 'start:dev:hotreload' | 'start:dev:hotreload-debug' | 'start:dev:hotreload-debug-wait'
-  change environment ('env_file' key) in docker-compose.yml to development ('dev.env')
+  change script in docker-compose.override.yml to one of 'dev:hot-reload' | 'dev:hot-reload:debug' | 'dev:hot-reload:debug:wait'
   run:
-    $ docker-compose down
-    $ docker-compose build
-    $ docker-compose up
+    $ develop.bat
 
-
--------
 
 * Production *
-  change script in Dockerfile to 'start'
-  change environment ('env_file' key) in docker-compose.yml to production ('prod.env')
+  run: 
+    $ deploy.bat
 
--------
 
 * Production for Heroku *
   https://devcenter.heroku.com/articles/container-registry-and-runtime#getting-started
   download heroku cli
-  (by default: Heroku doesnt use docker-compose.yml at all. so also doesnt use our environment files. so you doesnt need to change anything.
+  (by default: Heroku doesnt use docker-compose files at all. 
+   so also doesnt use our environment files.
    optional: add "heroku-buildpack-docker-compose" add-on to support docker-compose.yml)
   run:
     $ heroku login
@@ -44,14 +60,3 @@ prerequest installed:
     $ heroku container:push web -a <your-heroku-app-name>
     $ heroku container:release web -a <your-heroku-app-name>
     $ heroku open -a <your-heroku-app-name>
-
-----------------------------------------------
-
-* Features: *
-docker
-  nodemon
-    hot-reload
-  inspector
-    breakpoint
-    breakpoint-wait
-  ts-node
