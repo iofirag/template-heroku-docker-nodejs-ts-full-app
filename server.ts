@@ -11,15 +11,16 @@ const app = express();
  */
 app.set("port", process.env.PORT || 3000);
 
-console.log(process.env.COMPOSE_PROJECT_NAME)
+console.log(process.env.COMPOSE_PROJECT_NAME);
 
-const connectDB = async (DBconnectionString) => {
-  console.log(`Connecting to DB - uri: ${DBconnectionString}`);
-  return mongoose.connect(DBconnectionString, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true,
-  });
+// Define our json response
+const data = {
+  blog_name: "docker_nodejs_app",
+  blog_author: "wachira (tesh254)",
+  blog_author_twitter: "@wachira_dev",
+  NODE_ENV: `${process.env.NODE_ENV}`,
+  db_connection_string: `connection string: ${process.env.MONGODB_URI}`,
+  db_connection_status: 0,
 };
 
 (async () => {
@@ -31,23 +32,14 @@ const connectDB = async (DBconnectionString) => {
   }
 })();
 
-
-// Define our json response
-const data = {
-  blog_name: "docker_nodejs_app",
-  blog_author: "wachira (tesh254)",
-  blog_author_twitter: "@wachira_dev",
-  db_connection_string: `connection string: ${process.env.MONGODB_URI}`,
-  NODE_ENV: `${process.env.NODE_ENV}`,
-  isDBConnected: false,
-};
 /**
  * To ensure works as it should we will create a
  * simple endpoint to return a json response
+ * with our db connection status
  */
 // Define out GET request endpoint
 app.get("/", (req, res) => {
-  data.isDBConnected = !!mongoose.connection
+  data.db_connection_status = mongoose.connection.readyState;
   res.status(200).json(data);
 });
 
@@ -55,3 +47,12 @@ app.get("/", (req, res) => {
 app.listen(app.get("port"), () => {
   console.log(`Server listening on port ${app.get("port")}`);
 });
+
+async function connectDB(DBconnectionString) {
+  console.log(`Connecting to DB - uri: ${DBconnectionString}`);
+  return mongoose.connect(DBconnectionString, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  });
+};
