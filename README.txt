@@ -1,3 +1,9 @@
+prerequest installed:
+- NodeJS
+- Npm
+- yarn
+- Docker-Desktop
+
 * Development / vpn *
   change script in Dockerfile to 'start:dev:hotreload' | 'start:dev:hotreload-debug' | 'start:dev:hotreload-debug-wait'
   change environment ('env_file' key) in docker-compose.yml to development ('dev.env')
