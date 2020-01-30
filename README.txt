@@ -32,11 +32,14 @@ prerequest installed:
     $ heroku container:login
     $ heroku create <your-heroku-app-name>
       (optional: 
-        in your Heroku app :
-        Resources > Add-ons
+        in your Heroku app:
+          Resources > Add-ons
         add "mLab MongoDB" add-on.
         you can view your mongoDB credentials in app vars under:
-        settings > Config Vars > MONGODB_URI)
+          settings > Config Vars > MONGODB_URI)
+      (optional: 
+        add new vars to heroku app
+          $ heroku config:set TEST=my-test-var)
     $ heroku container:push web -a <your-heroku-app-name>
     $ heroku container:release web -a <your-heroku-app-name>
     $ heroku open -a <your-heroku-app-name>
