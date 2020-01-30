@@ -37,7 +37,7 @@ const data = {
   blog_name: "docker_nodejs_app",
   blog_author: "wachira (tesh254)",
   blog_author_twitter: "@wachira_dev",
-  // db_connection_string: `connection string: ${process.env.MONGODB_URI}`,
+  db_connection_string: `connection string: ${process.env.MONGODB_URI}`,
   NODE_ENV: `${process.env.NODE_ENV}`,
   isDBConnected: false,
 };
