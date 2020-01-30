@@ -21,9 +21,10 @@ prerequest installed:
   change script in Dockerfile to 'start'
   change environment ('env_file' key) in docker-compose.yml to production ('prod.env')
 
+-------
+
 * Production for Heroku *
   https://devcenter.heroku.com/articles/container-registry-and-runtime#getting-started
-
   download heroku cli
   (Heroku doesnt use docker-compose at all. so also doesnt our environment files. so doesnt need to change anything.)
   run:
