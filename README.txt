@@ -25,10 +25,17 @@ prerequest installed:
   https://devcenter.heroku.com/articles/container-registry-and-runtime#getting-started
 
   download heroku cli
+  (Heroku doesnt use docker-compose at all. so also doesnt our environment files. so doesnt need to change anything.)
   run:
     $ heroku login
     $ heroku container:login
     $ heroku create <your-heroku-app-name>
+      (optional: 
+        in your Heroku app :
+        Resources > Add-ons
+        add "mLab MongoDB" add-on.
+        you can view your mongoDB credentials in app vars under:
+        settings > Config Vars > MONGODB_URI)
     $ heroku container:push web -a <your-heroku-app-name>
     $ heroku container:release web -a <your-heroku-app-name>
     $ heroku open -a <your-heroku-app-name>
