@@ -27,7 +27,7 @@ prerequest installed:
   https://devcenter.heroku.com/articles/container-registry-and-runtime#getting-started
   download heroku cli
   (by default: Heroku doesnt use docker-compose.yml at all. so also doesnt use our environment files. so you doesnt need to change anything.
-  optional: add "heroku-buildpack-docker-compose" add-on to support docker-compose.yml)
+   optional: add "heroku-buildpack-docker-compose" add-on to support docker-compose.yml)
   run:
     $ heroku login
     $ heroku container:login
