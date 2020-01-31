@@ -13,6 +13,13 @@ app.set("port", process.env.PORT || 3000);
 
 console.log(process.env.COMPOSE_PROJECT_NAME);
 
+enum ConnectionStatusEnum {
+  'disconnected' = 0,
+  'connected' = 1,
+  'connecting' = 2,
+  'disconnecting' = 3,
+};
+
 // Define our json response
 const data = {
   blog_name: "docker_nodejs_app",
@@ -20,7 +27,7 @@ const data = {
   blog_author_twitter: "@wachira_dev",
   NODE_ENV: `${process.env.NODE_ENV}`,
   db_connection_string: `connection string: ${process.env.MONGODB_URI}`,
-  db_connection_status: 0,
+  db_connection_status: '',
 };
 
 (async () => {
@@ -39,7 +46,7 @@ const data = {
  */
 // Define out GET request endpoint
 app.get("/", (req, res) => {
-  data.db_connection_status = mongoose.connection.readyState;
+  data.db_connection_status = ConnectionStatusEnum[mongoose.connection.readyState];
   res.status(200).json(data);
 });
 
