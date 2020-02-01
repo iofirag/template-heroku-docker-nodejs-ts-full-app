@@ -22,9 +22,7 @@ enum ConnectionStatusEnum {
 
 // Define our json response
 const data = {
-  blog_name: "docker_nodejs_app",
-  blog_author: "wachira (tesh254)",
-  blog_author_twitter: "@wachira_dev",
+  blog_name: "docker nodejs mini app",
   NODE_ENV: `${process.env.NODE_ENV}`,
   db_connection_string: `connection string: ${process.env.MONGODB_URI}`,
   db_connection_status: '',
