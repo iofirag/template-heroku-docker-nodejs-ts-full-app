@@ -9,7 +9,7 @@ export class Routes {
       .use("/api", apiRouter)
 
       .get("/info", (req: Request, res: Response) => {
-        // Define our json response
+        // Define our information response json
         const responseJson = {
           project_name: `${process.env.COMPOSE_PROJECT_NAME}`,
           NODE_ENV: `${process.env.NODE_ENV}`,

@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 // import codes from "builtin-status-codes";
 import Utils from "../utils/utils";
+import { Model } from "mongoose";
 
 export default class GenericFunctions {
   // ***************** CRUD *********************************
@@ -13,7 +14,7 @@ export default class GenericFunctions {
     return model.create(newItem, (err, doc) => {
       if (err) return Utils.handleError(err, res);
       // saved!
-      return res.status(200).json({ success: 1, data: doc });
+      return res.status(200).json({data: doc});
     });
   };
 
@@ -25,7 +26,7 @@ export default class GenericFunctions {
     return model.find({ _id }, (err, doc) => {
       if (err) return Utils.handleError(err, res);
       // saved!
-      return res.status(200).json({ success: 1, data: doc });
+      return res.status(200).json({data: doc});
     });
   };
 
@@ -45,7 +46,7 @@ export default class GenericFunctions {
       (err, doc) => {
         if (err) return Utils.handleError(err, res);
         // updated!
-        return res.status(200).json({ success: 1, data: doc });
+        return res.status(200).json({data: doc});
       }
     );
   };
@@ -63,13 +64,13 @@ export default class GenericFunctions {
       if (err) return Utils.handleError(err, res);
       // deleted at most one document
       const { n, ok } = deleteRes;
-      return res.status(200).json({ n, ok });
+      return res.status(200).json({n, ok});
     });
   };
   // *********************************************************
   // Not in use
-  // public static test = async (req: Request, res: Response) => {
-  //   const pageContent: string = `<h1>Model test api 📑</h1>`;
-  //   return /* not need await */ await res.status(200).send(pageContent);
-  // };
+  public static test = async (model: Model<any>, req: Request, res: Response) => {
+    const pageContent: string = `<h1>${model.modelName} ${model.name} test api 📑</h1>`;
+    return /* not need await */ await res.status(200).send(pageContent);
+  };
 }
