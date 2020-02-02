@@ -1,5 +1,4 @@
 import { Request, Response, Router } from "express";
-// import { synagogueRouter } from "./synagogue.routes";
 import { userRouter } from "./user.routes";
 
 export const apiRouter: Router = Router();

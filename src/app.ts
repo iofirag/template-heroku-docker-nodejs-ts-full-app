@@ -4,7 +4,6 @@ import express from "express";
 import { Application } from "express";
 import { Routes } from "./routes/index";
 import { DBDriver } from "./config/db.config";
-// import { mainRouter } from "./routes/old-index";
 
 class App {
   public app: Application;
