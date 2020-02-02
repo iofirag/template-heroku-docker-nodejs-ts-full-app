@@ -9,7 +9,7 @@
   "scripts": {
     "------production------": "",
     "start": "ts-node src/server.ts",
-    "start-js": "node index.js",
+    "start-js": "node src/index.js",
     "------development------": "",
     "---working-docker-online---": "",
     "dev:hot-reload": "nodemon -L --exec ts-node src/server.ts",
