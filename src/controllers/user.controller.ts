@@ -18,6 +18,12 @@ export class UserController {
   public static deleteById = async (req: Request, res: Response) => {
     return await GenericFunctions.deleteById(model, req, res);
   };
+  public static getAll = async (req: Request, res: Response) => {
+    return await GenericFunctions.getAll(model, req, res);
+  };
+  public static deleteAll = async (req: Request, res: Response) => {
+    return await GenericFunctions.deleteAll(model, req, res);
+  };
   // *********************************************************
   public static test = async (req: Request, res: Response) => {
     return await GenericFunctions.test(model, req, res);

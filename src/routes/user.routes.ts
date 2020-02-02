@@ -11,6 +11,9 @@ userRouter
   .post("/updateById", cont.updateById)
   .post("/deleteById", cont.deleteById)
   
+  .get('/getAll', cont.getAll)
+  .post('/deleteAll', cont.deleteAll)
+
   .post("/", cont.create)
   .get("/:_id", cont.getById)
   .put("/:_id", cont.updateById)
