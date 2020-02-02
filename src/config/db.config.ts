@@ -1,32 +1,23 @@
 import mongoose from 'mongoose';
-import { DBConfig } from '../utils/consts';
 
 export class DBDriver {
   
-  public connect = async () => {
+  public async connect() {
     try {
-      mongoose.connection
-        .on('error', e => {
-          console.error(`connection error:`, e);  // Mongoose error message output
-        })
-        .once('open', () => {
-          console.log(`DB connected`);  // Once a connection is initiated
-        });
-    
-      await mongoose.connect(
-        'mongodb://mongo/test',  // Unmark when using docker-compose
-        // 'mongodb://localhost:27017/test', // Unmark when using standard yarn start / yarn startnodemon
-        // `mongodb://${DBConfig.user}:${DBConfig.pass}@${DBConfig.url}:${DBConfig.port}/${DBConfig.databaseName}`, // unmark when using SAAS mongo
-        {
-          useCreateIndex: true,
-          useNewUrlParser: true,
-          useUnifiedTopology: true
-        }
-      );
-      
-    } catch (e) {
-      console.error(`exception while connecting to mongoDB:`, e);
+      const connected = await this.connectDB(process.env.MONGODB_URI);
+      console.log("Connected to mongo database successfully");
+    } catch(e) {
+      console.log('Error happend while connecting to the DB: ', e.message)
     }
+  }
+
+  public async connectDB(DBconnectionString) {
+    console.log(`Connecting to DB - uri: ${DBconnectionString}`);
+    return mongoose.connect(DBconnectionString, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true,
+      useCreateIndex: true,
+    });
   }
 }
 // When the node process is terminated (Ctrl+c is pressed) , close the connection to the DB.
