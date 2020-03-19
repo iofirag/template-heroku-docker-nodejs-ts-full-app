@@ -3,6 +3,7 @@
 - Npm
 - yarn
 - Docker-Desktop
+  - Settings > Resources > File-Sharing > Checked with V.
 
 ----------------------------------------------
 
