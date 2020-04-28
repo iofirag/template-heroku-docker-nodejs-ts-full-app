@@ -82,3 +82,5 @@ docker
   3. check exported ports of services in `.env` files
 
   4. update VB to latest version (for creating VB network adapters, etc.. successfully)
+  
+  5. run as administrator!
