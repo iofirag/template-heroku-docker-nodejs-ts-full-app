@@ -2,7 +2,7 @@ import app from "./app";
 
 const notifyMessage: String = `
   NOTE: 
-  - if you are using Docker-Toolbox you can see your ip address in Docker-Terminal by running: "$(docker-machine ip)"
+  - if you are using Docker-Toolbox you can see your ip address in Docker-Quickstart-Terminal by running: "$(docker-machine ip)"
   (Docker toolbox doesn't map ports to localhost. It maps it to the Docker VM IP's)
   
   - if you are using Docker-For-Windows your ip will be just normal as localhost / 127.0.0.1`
