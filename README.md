@@ -41,7 +41,7 @@ docker
 
 
 ### Production
-  run (as administrator): 
+  run (as administrator):
     $ run-as-production-mode.bat
 
 
