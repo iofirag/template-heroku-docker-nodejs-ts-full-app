@@ -67,3 +67,18 @@ docker
     $ heroku container:push web -a <your-heroku-app-name>
     $ heroku container:release web -a <your-heroku-app-name>
     $ heroku open -a <your-heroku-app-name>
+
+### Q.A
+- host cant access docker services?
+  
+  1. toolbox magical ip
+    
+    check your ip by running `docker-machine ip`
+  
+  2. Add NodeJS/Docker/VB to Firewall\Allowed apps
+    
+    `Control Panel\System and Security\Windows Defender Firewall\Allowed apps`
+
+  3. check exported ports of services in `.env` files
+
+  4. update VB to latest version (for creating VB network adapters, etc.. successfully)
