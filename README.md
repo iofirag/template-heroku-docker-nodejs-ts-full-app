@@ -30,7 +30,7 @@ docker
 
 ### Development / vpn
   change script in docker-compose.override.yml to one of 'dev:hot-reload' | 'dev:hot-reload:debug' | 'dev:hot-reload:debug:wait'
-  run:
+  run (as administrator):
     $ run-as-develop-mode.bat
 
  - Container ip:
@@ -41,7 +41,7 @@ docker
 
 
 ### Production
-  run: 
+  run (as administrator): 
     $ run-as-production-mode.bat
 
 
