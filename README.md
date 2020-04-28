@@ -1,4 +1,4 @@
-* Prerequest installed: *
+### Prerequest installed:
 - NodeJS
 - Npm
 - yarn
@@ -7,7 +7,7 @@
 
 ----------------------------------------------
 
-* Features: *
+### Features:
 docker
   - nodemon
       hot-reload
@@ -19,7 +19,7 @@ docker
   
 ----------------------------------------------
 
-* Environment Vars: *
+### Environment Vars:
   base-shared variables in:
     - .env
   override variables in:
@@ -28,24 +28,24 @@ docker
 
 ----------------------------------------------
 
-* Development / vpn *
+### Development / vpn
   change script in docker-compose.override.yml to one of 'dev:hot-reload' | 'dev:hot-reload:debug' | 'dev:hot-reload:debug:wait'
   run:
     $ run-as-develop-mode.bat
-    
-  Container ip:
-    NOTE: 
+
+ - Container ip:
+    NOTE:
       - if you are using Docker-Toolbox you can see your ip address in Docker-Terminal by running: "$(docker-machine ip)"
       (Docker toolbox doesn't map ports to localhost. It maps it to the Docker VM IP's)
       - if you are using Docker-For-Windows your ip will be just normal as localhost / 127.0.0.1`
 
 
-* Production *
+### Production
   run: 
     $ run-as-production-mode.bat
 
 
-* Production for Heroku *
+### Production for Heroku
   https://devcenter.heroku.com/articles/container-registry-and-runtime#getting-started
   download heroku cli
   (by default: Heroku doesnt use docker-compose files at all. 
