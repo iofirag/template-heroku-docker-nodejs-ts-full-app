@@ -21,8 +21,6 @@ class Server {
 
   private createServer(): void {
     app.listen(app.get("port"), () => {
-      // Note: 
-      
       console.log(
         `🌎 Typescript app listening on
         ${app.get("host")}:${app.get("port")}
