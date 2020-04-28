@@ -32,6 +32,13 @@ docker
   change script in docker-compose.override.yml to one of 'dev:hot-reload' | 'dev:hot-reload:debug' | 'dev:hot-reload:debug:wait'
   run:
     $ run-as-develop-mode.bat
+    
+  container ip:
+    NOTE: 
+      - if you are using Docker-Toolbox you can see your ip address in Docker-Terminal by running: "$(docker-machine ip)"
+        (Docker toolbox doesn't map ports to localhost. It maps it to the Docker VM IP's)
+  
+      - if you are using Docker-For-Windows your ip will be just normal as localhost / 127.0.0.1`
 
 
 * Production *
