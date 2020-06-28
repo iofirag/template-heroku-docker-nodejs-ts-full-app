@@ -1,4 +1,4 @@
-import app from "./app";
+// import server from "./app";
 
 const notifyMessage: String = `
   NOTE: 
@@ -7,24 +7,71 @@ const notifyMessage: String = `
   
   - if you are using Docker-For-Windows your ip will be just normal as localhost / 127.0.0.1`
 
-class Server {
+
+  import { json, urlencoded } from "body-parser";
+  import cors from "cors";
+  import express, { Application } from "express";
+  import { Routes } from "./routes/index";
+  import { DBDriver } from "./config/db.config";
+  import http from 'http'
+  import socketio from 'socket.io';
+  
+class Server {  
+
+  public app: Application = express();
+  public dbDriver: DBDriver = new DBDriver();
+  public routePrv: Routes = new Routes();
+  public httpServer: http.Server;
+  public io: SocketIO.Server;
+
   constructor() {
+    this.httpServer = new http.Server(this.app);
+    this.io = socketio(this.httpServer)
+    this.applyConfigs();
+    this.applyMiddlewares();
+    this.mountRestApi();
+    this.mountSocketIO();
     this.configureServer();
     this.createServer();
   }
 
+  private async applyConfigs() {
+    await this.dbDriver.connect();
+  }
+
+  private applyMiddlewares(): void {
+    this.app.use(cors());
+    this.app.use(json());
+    this.app.use(urlencoded({ extended: false }));
+  }
+
+  private mountRestApi(): void {
+    this.routePrv.routes(this.app, this.io);
+    // this.app.use("/", mainRouter);
+  }
+
+  private mountSocketIO(): void {
+    // this.io.on("connection", function (socket) {
+    //   // here are connections from /new
+    //   console.log('user connected');
+    //   socket.on('disconnect', (reason) => {
+    //     console.log(`${reason}`);
+    //   });
+    // })
+  }
+
   private configureServer(): void {
     // Configure server host + port
-    app.set("host", process.env.HOST || '<your-ip>');
-    app.set("port", process.env.PORT || 3000);
+    this.app.set("host", process.env.HOST || '<your-ip>');
+    this.app.set("port", process.env.PORT || 3000);
   }
 
   private createServer(): void {
-    app.listen(app.get("port"), () => {
+    const server = this.httpServer.listen(this.app.get("port"), () => {
       console.log(
-        `🌎 Typescript app listening on
-        ${app.get("host")}:${app.get("port")}
-        Open up https://${app.get("host")}:${app.get("port")}/ in your browser.
+        `🌎 Typescript server.app listening on
+        ${this.app.get("host")}:${this.app.get("port")}
+        Open up https://${this.app.get("host")}:${this.app.get("port")}/ in your browser.
         ${notifyMessage}`
       );
     });
