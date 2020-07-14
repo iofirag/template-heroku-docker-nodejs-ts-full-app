@@ -66,13 +66,7 @@ export default class GenericFunctions {
 
   public static getAll = async (model: any, req: Request, res: Response) => {
     return model.find({}, (err, docs) => {
-      const docsMap = {};
-
-      docs.forEach((doc) => {
-        docsMap[doc._id] = doc;
-      });
-  
-      res.status(200).json(docsMap);  
+      res.status(200).json(docs);  
     });
   };
 
