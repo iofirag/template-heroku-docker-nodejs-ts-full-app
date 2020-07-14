@@ -14,14 +14,10 @@ export class Routes {
         const responseJson = {
           project_name: `${process.env.COMPOSE_PROJECT_NAME}`,
           NODE_ENV: `${process.env.NODE_ENV}`,
-          db_connection_string: `connection string: ${process.env.MONGODB_URI}`,
+          db_connection_string: `connection string: ${process.env.DBSERVICE_URI}`,
           db_connection_status: DBConnectionStatusEnum[mongoose.connection.readyState]
         };
         res.status(200).json(responseJson);
-      })
-      .get('/',(req: Request, res: Response) => {
-        const pageContent: string = `<h1>King 👑</h1>`;
-        res.status(200).send(pageContent);
       })
       .get('/test-io', (req: Request, res: Response) => {
         const pageContent: string = `
@@ -38,6 +34,10 @@ export class Routes {
           </script>
           </body>
         </html>`;
+        res.status(200).send(pageContent);
+      })
+      .get('/',(req: Request, res: Response) => {
+        const pageContent: string = `<h1>King 👑</h1>`;
         res.status(200).send(pageContent);
       });
 

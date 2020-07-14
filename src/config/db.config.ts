@@ -4,7 +4,7 @@ export class DBDriver {
   
   public async connect() {
     try {
-      const connected = await this.connectDB(process.env.MONGODB_URI);
+      const connected = await this.connectDB(process.env.DBSERVICE_URI);
       console.log("Connected to mongo database successfully");
     } catch(e) {
       console.log('Error happend while connecting to the DB: ', e.message)

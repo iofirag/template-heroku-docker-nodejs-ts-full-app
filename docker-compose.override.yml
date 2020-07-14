@@ -4,7 +4,7 @@
 version: "3"
 
 volumes:
-  mongovolume:
+  dbvolume:
 
 # Define our services 
 services: 
@@ -22,21 +22,23 @@ services:
     # You can other services such as a Redis
     links: # depends_on alias name
       # The name should be similar to the service you will build
-      - mongo
+      - dbservice
   # Our database service called mongo
-  mongo:
+  dbservice:
     # The name of the database container, NOTE: it is similar to the name provided
     # in the links value
-    container_name: ${COMPOSE_PROJECT_NAME}_mongo
+    container_name: ${COMPOSE_PROJECT_NAME}_dbservice
     # Builds a mongo image from the docker repository
     image: mongo
     # Exposes the ports that mongo uses
     ports:
       - "27017:27017"
     volumes:
-      - mongovolume:/data/db # working - volume created in volume section
-    # environment:
-    # - COMPOSE_CONVERT_WINDOWS_PATHS=1
+      - dbvolume:/data/db # working - volume created in volume section
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      # - COMPOSE_CONVERT_WINDOWS_PATHS=1
   # Development only
   adminmongo:
     container_name: ${COMPOSE_PROJECT_NAME}_adminmongo
@@ -46,3 +48,10 @@ services:
       - HOST=0.0.0.0
     ports:
       - "1234:1234"
+
+  adminer:
+    container_name: ${COMPOSE_PROJECT_NAME}_adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

@@ -29,8 +29,8 @@ class Server {
     this.io = socketio(this.httpServer)
     this.applyConfigs();
     this.applyMiddlewares();
-    this.mountRestApi();
-    this.mountSocketIO();
+    this.mountRoutes();
+    // this.mountSocketIO();
     this.configureServer();
     this.createServer();
   }
@@ -45,20 +45,20 @@ class Server {
     this.app.use(urlencoded({ extended: false }));
   }
 
-  private mountRestApi(): void {
+  private mountRoutes(): void {
     this.routePrv.routes(this.app, this.io);
     // this.app.use("/", mainRouter);
   }
 
-  private mountSocketIO(): void {
-    // this.io.on("connection", function (socket) {
-    //   // here are connections from /new
-    //   console.log('user connected');
-    //   socket.on('disconnect', (reason) => {
-    //     console.log(`${reason}`);
-    //   });
-    // })
-  }
+  // private mountSocketIO(): void {
+  //   // this.io.on("connection", function (socket) {
+  //   //   // here are connections from /new
+  //   //   console.log('user connected');
+  //   //   socket.on('disconnect', (reason) => {
+  //   //     console.log(`${reason}`);
+  //   //   });
+  //   // })
+  // }
 
   private configureServer(): void {
     // Configure server host + port
