@@ -84,3 +84,10 @@ docker
   4. update VB to latest version (for creating VB network adapters, etc.. successfully)
   
   5. run as administrator!
+
+
+## Support
+Heroku dyno support
+You also can use Heroku's `mLab MongoDB` add-on for easy setup for the production server 
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/<git-username>/<repo-name>)
