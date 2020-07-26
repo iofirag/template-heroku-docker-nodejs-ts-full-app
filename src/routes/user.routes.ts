@@ -1,9 +1,8 @@
 import { Router } from "express";
 import { UserController as cont } from "../controllers/user.controller";
 
-export const userRouter: Router = Router();
+export const userRouter: Router = Router()
 
-userRouter
   // put here new api's
   .get("/test", cont.test)
 

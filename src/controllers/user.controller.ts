@@ -19,7 +19,8 @@ export class UserController {
     return await GenericFunctions.deleteById(model, req, res);
   };
   public static getAll = async (req: Request, res: Response) => {
-    return await GenericFunctions.getAll(model, req, res);
+    const docList = await GenericFunctions.getAll(model);
+    return res.json(docList);
   };
   public static deleteAll = async (req: Request, res: Response) => {
     return await GenericFunctions.deleteAll(model, req, res);
