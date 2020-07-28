@@ -62,18 +62,9 @@ export class GenericCRUDController /* implements IGenericCRUDController */ {
   }
 
   public static getAll = async (req: Request, res: Response, model: Model<Document>) => {
+    const { field, value } = req.query;
     try {
-      const docList = await GenericCRUDFunctions.getAll(model);
-      return res.status(200).json(docList);
-    } catch (err) {
-      return Utils.handleError(err, res);
-    }
-  }
-
-  public static getAllByfieldValue = async (req: Request, res: Response, model: Model<Document>) => {
-    const { field, value } = req.params;
-    try {
-      const docList = await GenericCRUDFunctions.getAll(model, field, value);
+      const docList: Document[] = await GenericCRUDFunctions.getAll(model, <string>field, <string>value);
       return res.status(200).json(docList);
     } catch (err) {
       return Utils.handleError(err, res);
