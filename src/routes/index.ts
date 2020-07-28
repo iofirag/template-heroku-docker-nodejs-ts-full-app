@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { apiRouter } from "./api.routes";
+import { ApiRouter } from "./api.routes";
 import { DBConnectionStatusEnum } from "../utils/consts";
 import mongoose from 'mongoose';
 import { Application } from "express";
@@ -7,7 +7,7 @@ import { Application } from "express";
 export class Routes {
   public routes(app: Application, io: SocketIO.Server): void {
     app
-      .use("/api", apiRouter)
+      .use("/api", new ApiRouter().router)
 
       .get("/info", (req: Request, res: Response) => {
         // Define our information response json

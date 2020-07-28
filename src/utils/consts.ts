@@ -8,3 +8,5 @@ export enum DBConnectionStatusEnum {
   'connecting' = 2,
   'disconnecting' = 3,
 };
+
+export const HOST = '';

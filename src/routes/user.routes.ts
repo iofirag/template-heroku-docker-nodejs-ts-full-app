@@ -1,20 +1,36 @@
 import { Router } from "express";
 import { UserController as cont } from "../controllers/user.controller";
+import { UserModel } from "../models/user.model";
 
-export const userRouter: Router = Router()
 
-  // put here new api's
-  .get("/test", cont.test)
+export class UserRouter {
+  public router: Router = Router()
 
-  // Bulk actions
-  .get('/getAll', cont.getAll)
-  .delete('/deleteAll', cont.deleteAll)
-  
-  // Leave at the end
-  .post("/", cont.create)
-  .get("/:_id", cont.getById)
-  .put("/:_id", cont.updateById)
-  .delete("/:_id", cont.deleteById)
+  constructor() {
+    this.createCustomApi()
+    this.createCRUDApi()
+  }
 
-  
-  
+  private createCRUDApi() {
+    // Describe collection
+    this.router
+    .get('/describe', (req, res) => { return cont.describe(req, res, UserModel)})
+
+    // Bulk actions
+    .get('/getAll', (req, res) => { return cont.getAll(req, res, UserModel)})
+    .get('/getAllByfieldValue', (req, res) => { return cont.getAll(req, res, UserModel)})
+    .delete('/deleteAll', (req, res) => { return cont.deleteAll(req, res, UserModel)})
+
+    // Leave at the end
+    .post('/', (req, res) => { return cont.create(req, res, UserModel)})
+    .get('/:_id', (req, res) => { return cont.getById(req, res, UserModel)})
+    .put('/:_id', (req, res) => { return cont.updateById(req, res, UserModel)})
+    .delete('/:_id', (req, res) => { return cont.deleteById(req, res, UserModel)})
+  }
+
+  private createCustomApi() {
+    // put here new rest api's
+    this.router
+    .get('/test', cont.test)
+  }
+}

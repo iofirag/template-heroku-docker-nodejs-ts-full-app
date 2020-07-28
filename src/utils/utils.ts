@@ -48,7 +48,7 @@ export default class Utils {
     return await Utils.asyncRequest(options)
   }
 
-  public static fetchInvestingPage = async(url) => {
+  public static fetchHtmlPage = async(url) => {
     const options = {
       'method': 'GET',
       url,
@@ -61,37 +61,36 @@ export default class Utils {
     return await Utils.executeRequestUsingRequest(options)
   }
 
-  public static fetchInvestingTechnicalSummaryData = async (indiceObj) => {
-    const {indiceSymbol, indiceId} = indiceObj
-    const investingIndicesRes: any = await Utils.fetchInvestingPage(`https://www.investing.com/indices/${indiceSymbol}`)
+  public static fetchHtmlData = async (indiceObj) => {
+    const serverRes: any = await Utils.fetchHtmlPage(`https://www.google.com`)
   
     const headerNames = []
     const investingIndicesTechnicalSummary = {}
-    const investingIndicesResTemplate = investingIndicesRes.body // (html content)
+    const serverResTemplate = serverRes.body // (html content)
   
     // parse html content
-    const dom: any = htmlparser2.parseDOM(investingIndicesResTemplate);
+    const dom: any = htmlparser2.parseDOM(serverResTemplate);
     const $ = cheerio.load(dom)
-    $('.genTbl.closedTbl.technicalSummaryTbl tr th').each((i, el) => {
-      if (i!==0) {
-        // headers
-        const headerName = el.children[0].data
-        headerNames.push(headerName)
-      }
-    })
-    const tdList = $('.genTbl.closedTbl.technicalSummaryTbl tr td')
-    tdList.each((i, el) => {
-      const val = el.children[0].data
-      if (i % 6 === 0) {
-        // Type coloumn
-        investingIndicesTechnicalSummary[val] = {}
-      } else {
-        // Other columns
-        const relatedRowType = tdList[Math.floor(i/6)*6].children[0].data
-        const relatedHeaderName = headerNames[i%6-1]
-        investingIndicesTechnicalSummary[relatedRowType][relatedHeaderName] = val
-      }
-    })
-    return investingIndicesTechnicalSummary
+    // $('.genTbl.closedTbl.technicalSummaryTbl tr th').each((i, el) => {
+    //   if (i!==0) {
+    //     // headers
+    //     const headerName = el.children[0].data
+    //     headerNames.push(headerName)
+    //   }
+    // })
+    // const tdList = $('.genTbl.closedTbl.technicalSummaryTbl tr td')
+    // tdList.each((i, el) => {
+    //   const val = el.children[0].data
+    //   if (i % 6 === 0) {
+    //     // Type coloumn
+    //     investingIndicesTechnicalSummary[val] = {}
+    //   } else {
+    //     // Other columns
+    //     const relatedRowType = tdList[Math.floor(i/6)*6].children[0].data
+    //     const relatedHeaderName = headerNames[i%6-1]
+    //     investingIndicesTechnicalSummary[relatedRowType][relatedHeaderName] = val
+    //   }
+    // })
+    return {}
   }
 }
