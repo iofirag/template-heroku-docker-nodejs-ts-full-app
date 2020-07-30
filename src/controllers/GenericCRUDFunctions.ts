@@ -1,6 +1,4 @@
-import { Request, Response } from "express";
 // import codes from "builtin-status-codes";
-import Utils from "../utils/utils";
 import { Model, Document, QueryFindOneAndUpdateOptions } from "mongoose";
 
 
@@ -23,8 +21,11 @@ export class GenericCRUDFunctions /* implements IGenericCRUDFunctions */ {
   }
 
   public static getAll = async (model: Model<Document>, field: string = '', value: string = '') => {
-    // return model.find({[field]: value});
-    return model.find({});
+    if (field && value) {
+      return model.find({[field]: value});
+    } else {
+      return model.find({});
+    }
   }
 
   public static deleteAll = async (model: Model<Document>) => {
