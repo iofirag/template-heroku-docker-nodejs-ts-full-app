@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { GenericCRUDController } from "../generic/GenericCRUDController";
+import { GenericCRUDController } from "../generic/genericCRUDController";
 import { UserModel as model } from "./user.model";
 import Utils from "../../utils/utils";
 
