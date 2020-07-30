@@ -57,6 +57,18 @@ class Server {
         ${notifyMessage}`
       );
     });
+    process.on('SIGQUIT', () => {
+      console.log('app SIGQUIT');
+      process.exit(0);
+    });
+    process.on('SIGINT', () => {
+      console.log('app sigint');
+      process.exit(0);
+    });
+    process.on('exit', () => {
+      console.log('app exit');
+      process.exit(0);
+    });
   }
 }
 
