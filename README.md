@@ -29,8 +29,9 @@ docker
 ----------------------------------------------
 
 ### Development / vpn
-  change script in docker-compose.override.yml to one of 'dev:hot-reload' | 'dev:hot-reload:debug' | 'dev:hot-reload:debug:wait'
+  change script in docker-compose.override.yml to one of 
   run (as administrator):
+    docker:[server + db + db-viewer]
     $ run-as-develop-mode.bat
 
  - Container ip:
@@ -39,6 +40,10 @@ docker
       (Docker toolbox doesn't map ports to localhost. It maps it to the Docker VM IP's)
       - if you are using Docker-For-Windows your ip will be just normal as localhost / 127.0.0.1`
 
+- can run also as server stand alone and docker:[db + db-viewer] project by running:
+    $ yarn start | dev:hot-reload | dev:hot-reload:debug | dev:hot-reload:debug:wait
+    and in another terminal:
+    $ ./run-develop-no-server.bat
 
 ### Production
   run (as administrator):
