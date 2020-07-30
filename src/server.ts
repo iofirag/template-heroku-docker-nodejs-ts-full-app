@@ -1,4 +1,11 @@
 // import server from "./app";
+import { json, urlencoded } from "body-parser";
+import cors from "cors";
+import express, { Application } from "express";
+import { DBDriver } from "./config/db.config";
+import http from 'http'
+import socketio from 'socket.io';
+import { AppRouter } from "./routes";
 
 const notifyMessage: String = `
   NOTE: 
@@ -6,31 +13,21 @@ const notifyMessage: String = `
   (Docker toolbox doesn't map ports to localhost. It maps it to the Docker VM IP's)
   
   - if you are using Docker-For-Windows your ip will be just normal as localhost / 127.0.0.1`
-
-
-  import { json, urlencoded } from "body-parser";
-  import cors from "cors";
-  import express, { Application } from "express";
-  import { Routes } from "./routes/index";
-  import { DBDriver } from "./config/db.config";
-  import http from 'http'
-  import socketio from 'socket.io';
   
 class Server {  
 
   public app: Application = express();
   public dbDriver: DBDriver = new DBDriver();
-  public routePrv: Routes = new Routes();
   public httpServer: http.Server;
   public io: SocketIO.Server;
+  public appRouter: AppRouter;
 
   constructor() {
     this.httpServer = new http.Server(this.app);
-    this.io = socketio(this.httpServer)
+    this.io = socketio(this.httpServer);
+    this.appRouter = new AppRouter(this.app, this.io);
     this.applyConfigs();
     this.applyMiddlewares();
-    this.mountRoutes();
-    // this.mountSocketIO();
     this.configureServer();
     this.createServer();
   }
@@ -44,21 +41,6 @@ class Server {
     this.app.use(json());
     this.app.use(urlencoded({ extended: false }));
   }
-
-  private mountRoutes(): void {
-    this.routePrv.routes(this.app, this.io);
-    // this.app.use("/", mainRouter);
-  }
-
-  // private mountSocketIO(): void {
-  //   // this.io.on("connection", function (socket) {
-  //   //   // here are connections from /new
-  //   //   console.log('user connected');
-  //   //   socket.on('disconnect', (reason) => {
-  //   //     console.log(`${reason}`);
-  //   //   });
-  //   // })
-  // }
 
   private configureServer(): void {
     // Configure server host + port
