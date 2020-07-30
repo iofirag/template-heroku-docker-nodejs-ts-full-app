@@ -85,6 +85,14 @@ export class GenericCRUDController /* implements IGenericCRUDController */ {
     const pageContent: string = `<h1>${model.modelName} ${model.name} describe api 📑</h1>`;
     return /* not need await */ res.status(200).send(pageContent);
   }
+
+  public static printRequest = async (req: Request, res: Response, next) => {
+    console.log('url=', req.path)
+    console.log('params=', req.params)
+    console.log('query=', req.query)
+    console.log('body=', req.body)
+    next()
+  }
 }
 
 

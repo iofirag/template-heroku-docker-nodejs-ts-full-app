@@ -7,6 +7,7 @@ import http from 'http';
 import socketio from 'socket.io';
 import { AppRouter } from "./routes";
 import dotenv from 'dotenv';
+import { GenericCRUDController } from "./components/generic/genericCRUDController";
 
 const notifyMessage: String = `
   NOTE: 
@@ -26,10 +27,10 @@ class Server {
     console.log(dotenv.config())
     this.dbDriver = new DBDriver(process.env.DBSERVICE_URI);
     this.httpServer = new http.Server(this.app);
+    this.applyMiddlewares();
     this.io = socketio(this.httpServer);
     this.appRouter = new AppRouter(this.app, this.io);
     // this.applyConfigs();
-    this.applyMiddlewares();
     this.configureServer();
     this.createServer();
   }
@@ -40,6 +41,7 @@ class Server {
     this.app.use(cors());
     this.app.use(json());
     this.app.use(urlencoded({ extended: false }));
+    this.app.use(GenericCRUDController.printRequest)
   }
 
   private configureServer(): void {
