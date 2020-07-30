@@ -1,0 +1,42 @@
+# Used for development propose
+# Development-Override compose configuration
+# Defines our composer file version
+version: "3"
+
+volumes:
+  dbvolume:
+
+# Define our services 
+services: 
+  # Our database service called mongo
+  dbservice:
+    # The name of the database container, NOTE: it is similar to the name provided
+    # in the links value
+    container_name: ${COMPOSE_PROJECT_NAME}_dbservice
+    # Builds a mongo image from the docker repository
+    image: mongo
+    # Exposes the ports that mongo uses
+    ports:
+      - "27017:27017"
+    volumes:
+      - dbvolume:/data/db # working - volume created in volume section
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      # - COMPOSE_CONVERT_WINDOWS_PATHS=1
+  # Development only
+  adminmongo:
+    container_name: ${COMPOSE_PROJECT_NAME}_adminmongo
+    image: "mrvautin/adminmongo"
+    restart: always
+    environment:
+      - HOST=0.0.0.0
+    ports:
+      - "1234:1234"
+
+  adminer:
+    container_name: ${COMPOSE_PROJECT_NAME}_adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

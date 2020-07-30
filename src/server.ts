@@ -3,9 +3,10 @@ import { json, urlencoded } from "body-parser";
 import cors from "cors";
 import express, { Application } from "express";
 import { DBDriver } from "./config/db.config";
-import http from 'http'
+import http from 'http';
 import socketio from 'socket.io';
 import { AppRouter } from "./routes";
+import dotenv from 'dotenv';
 
 const notifyMessage: String = `
   NOTE: 
@@ -15,26 +16,25 @@ const notifyMessage: String = `
   - if you are using Docker-For-Windows your ip will be just normal as localhost / 127.0.0.1`
   
 class Server {  
-
   public app: Application = express();
-  public dbDriver: DBDriver = new DBDriver();
+  public dbDriver: DBDriver;
   public httpServer: http.Server;
   public io: SocketIO.Server;
   public appRouter: AppRouter;
 
   constructor() {
+    console.log(dotenv.config())
+    this.dbDriver = new DBDriver(process.env.DBSERVICE_URI);
     this.httpServer = new http.Server(this.app);
     this.io = socketio(this.httpServer);
     this.appRouter = new AppRouter(this.app, this.io);
-    this.applyConfigs();
+    // this.applyConfigs();
     this.applyMiddlewares();
     this.configureServer();
     this.createServer();
   }
 
-  private async applyConfigs() {
-    await this.dbDriver.connect();
-  }
+  private async applyConfigs() { }
 
   private applyMiddlewares(): void {
     this.app.use(cors());
