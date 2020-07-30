@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { GenericCRUDController } from "./GenericCRUDController";
-import { UserModel as model } from "../models/user.model";
-import Utils from "../utils/utils";
+import { GenericCRUDController } from "../generic/GenericCRUDController";
+import { UserModel as model } from "./user.model";
+import Utils from "../../utils/utils";
 
 
 export class UserController extends GenericCRUDController {

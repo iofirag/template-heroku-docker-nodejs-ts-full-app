@@ -1,5 +1,5 @@
 import { Document, Schema, Model, model } from 'mongoose';
-import { CollectionsNames } from "../utils/consts";
+import { CollectionsNames } from "../../utils/consts";
 
 
 export interface IUser extends Document {

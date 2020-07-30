@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 // import codes from "builtin-status-codes";
-import Utils from "../utils/utils";
+import Utils from "../../utils/utils";
 import { Model, Document } from "mongoose";
 import { GenericCRUDFunctions } from "./GenericCRUDFunctions";
 

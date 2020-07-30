@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { UserRouter } from "./user.routes";
+import { UserRouter } from "../components/user/user.routes";
 
 
 export class ApiRouter {

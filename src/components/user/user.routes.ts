@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { UserController as cont } from "../controllers/user.controller";
-import { UserModel } from "../models/user.model";
+import { UserController as cont } from "./user.controller";
+import { UserModel } from "./user.model";
 
 
 export class UserRouter {
@@ -9,6 +9,12 @@ export class UserRouter {
   constructor() {
     this.createCustomApi()
     this.createCRUDApi()
+  }
+  
+  private createCustomApi() {
+    // put here new rest api's
+    this.router
+    .get('/test', cont.test)
   }
 
   private createCRUDApi() {
@@ -26,11 +32,5 @@ export class UserRouter {
     .get('/:_id', (req, res) => { return cont.getById(req, res, UserModel)})
     .put('/:_id', (req, res) => { return cont.updateById(req, res, UserModel)})
     .delete('/:_id', (req, res) => { return cont.deleteById(req, res, UserModel)})
-  }
-
-  private createCustomApi() {
-    // put here new rest api's
-    this.router
-    .get('/test', cont.test)
   }
 }
