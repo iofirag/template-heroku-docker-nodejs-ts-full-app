@@ -16,6 +16,14 @@ export class GenericCRUDFunctions /* implements IGenericCRUDFunctions */ {
     return model.findByIdAndUpdate(_id, { $set: updatedData }, op)
   }
 
+  public static updateListFieldBySubDocId = async (model: Model<Document>, listFieldName: string, listItemId: string, updatedData: any, op: QueryFindOneAndUpdateOptions={}) => {
+    const updatedDataSet = {}
+    Object.keys(updatedData).forEach(key => {
+      updatedDataSet[`${listFieldName}.$.${key}`] = updatedData[key]
+    })
+    return model.update({[`${listFieldName}._id`]: listItemId}, {$set: updatedDataSet})
+  }
+
   public static deleteById = async (model: Model<Document>, _id: string) => {
     return model.findByIdAndDelete(_id);
   }
